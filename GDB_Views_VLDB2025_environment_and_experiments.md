@@ -160,7 +160,7 @@ head -n 1 "$DB_HOME/import/person_0_0.csv"
 1|1|...
 ```
 
-这里第一列是 Neo4j import 内部 ID，第二列保留为节点属性 `id:long`，因为实验查询会用 `person.id`、`forum.id` 等属性。
+这里第一列是 Neo4j import 内部 ID，第二列保留为节点属性 `id:long`，因为实验查询会用 `person.id`、`forum.id` 等属性。转换脚本还会把 `creationDate`、`deletionDate`、`birthday`、`joinDate` 这类 LDBC ISO/date 字符串转换为 epoch milliseconds，因为 GDB_VIEW 查询里按毫秒整数比较这些字段。
 
 ## 5. 导入 LDBC 到 Neo4j store
 
@@ -418,10 +418,31 @@ python3 "$DOCS_HOME/scripts/prepare_ldbc_for_neo4j_admin_import.py" \
 head -n 1 "$DB_HOME/headers/organisation_isLocatedIn_place_0_0.csv"
 ```
 
-### 12.5 `FileNotFoundException: /home/db/yzheng57/.../time.txt`
+### 12.5 `Not an integer: "2011-...+0000"`
+
+说明你使用的是旧转换结果，时间字段还没有从 ISO 字符串转换成 epoch milliseconds。重新运行最新版转换脚本：
+
+```bash
+rm -rf "$DB_HOME/import" "$DB_HOME/headers"
+mkdir -p "$DB_HOME/import" "$DB_HOME/headers"
+python3 "$DOCS_HOME/scripts/prepare_ldbc_for_neo4j_admin_import.py" \
+  "$DB_HOME/import_raw" \
+  "$DB_HOME/import" \
+  "$DB_HOME/headers"
+```
+
+如果前一次导入已经失败，Neo4j 会留下不一致 store。重新导入前删除目标库目录：
+
+```bash
+rm -rf "$DB_HOME/data/databases/neo4j" "$DB_HOME/data/transactions/neo4j"
+```
+
+然后再执行第 5 节导入命令。
+
+### 12.6 `FileNotFoundException: /home/db/yzheng57/.../time.txt`
 
 修复 `src/main/Main.java`，把计时输出路径改成 `./test/time.txt`。
 
-### 12.6 store lock
+### 12.7 store lock
 
 不要同时用外部 Neo4j server 和本项目打开同一个 `DB_HOME`。

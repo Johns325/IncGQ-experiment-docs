@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import argparse
 import csv
+from datetime import datetime, timezone
 from pathlib import Path
-
 
 NODE_GROUPS = {
     "place_0_0.csv": "Place",
@@ -52,18 +52,41 @@ NUMERIC_TYPES = {
     "workFrom": "int",
 }
 
+EPOCH_MILLIS_COLUMNS = {"creationDate", "deletionDate", "birthday", "joinDate"}
+
 
 def property_name(header):
-    name = header.split(":", 1)[0]
-    return name.rsplit(".", 1)[-1]
+    return header.split(":", 1)[0].rsplit(".", 1)[-1]
 
 
 def typed_property(header):
     name = property_name(header)
     value_type = NUMERIC_TYPES.get(name)
-    if value_type:
-        return f"{name}:{value_type}"
-    return name
+    return f"{name}:{value_type}" if value_type else name
+
+
+def to_epoch_millis(value):
+    if value == "" or value.lstrip("-").isdigit():
+        return value
+
+    normalized = value[:-1] + "+0000" if value.endswith("Z") else value
+    for fmt in ("%Y-%m-%dT%H:%M:%S.%f%z", "%Y-%m-%dT%H:%M:%S%z", "%Y-%m-%d"):
+        try:
+            dt = datetime.strptime(normalized, fmt)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return str(int(dt.timestamp() * 1000))
+        except ValueError:
+            continue
+    raise ValueError(f"Cannot convert date/time value to epoch milliseconds: {value}")
+
+
+def convert_value(name, value):
+    return to_epoch_millis(value) if name in EPOCH_MILLIS_COLUMNS else value
+
+
+def converted_row(names, row):
+    return [convert_value(name, value) for name, value in zip(names, row)]
 
 
 def convert_node(src, data_dst, header_dst, group):
@@ -73,17 +96,18 @@ def convert_node(src, data_dst, header_dst, group):
     with src.open(newline="", encoding="utf-8") as input_file, data_dst.open("w", newline="", encoding="utf-8") as output_file:
         reader = csv.reader(input_file, delimiter="|")
         writer = csv.writer(output_file, delimiter="|", lineterminator="\n")
-
         header = next(reader)
+        names = [property_name(column) for column in header]
+
         header_dst.write_text(
             "|".join([f":ID({group})", "id:long", *[typed_property(column) for column in header[1:]]]) + "\n",
             encoding="utf-8",
         )
 
         for row in reader:
-            if not row:
-                continue
-            writer.writerow([row[0], row[0], *row[1:]])
+            if row:
+                converted = converted_row(names, row)
+                writer.writerow([converted[0], converted[0], *converted[1:]])
 
 
 def convert_relationship(src, data_dst, header_dst, start_group, end_group):
@@ -93,8 +117,9 @@ def convert_relationship(src, data_dst, header_dst, start_group, end_group):
     with src.open(newline="", encoding="utf-8") as input_file, data_dst.open("w", newline="", encoding="utf-8") as output_file:
         reader = csv.reader(input_file, delimiter="|")
         writer = csv.writer(output_file, delimiter="|", lineterminator="\n")
-
         header = next(reader)
+        names = [property_name(column) for column in header]
+
         header_dst.write_text(
             "|".join([
                 f":START_ID({start_group})",
@@ -105,9 +130,8 @@ def convert_relationship(src, data_dst, header_dst, start_group, end_group):
         )
 
         for row in reader:
-            if not row:
-                continue
-            writer.writerow(row)
+            if row:
+                writer.writerow(converted_row(names, row))
 
 
 def main():
@@ -123,17 +147,17 @@ def main():
     missing = []
     for file_name, group in NODE_GROUPS.items():
         src = args.input_dir / file_name
-        if not src.exists():
+        if src.exists():
+            convert_node(src, args.data_dir / file_name, args.header_dir / file_name, group)
+        else:
             missing.append(file_name)
-            continue
-        convert_node(src, args.data_dir / file_name, args.header_dir / file_name, group)
 
     for file_name, (start_group, end_group) in REL_GROUPS.items():
         src = args.input_dir / file_name
-        if not src.exists():
+        if src.exists():
+            convert_relationship(src, args.data_dir / file_name, args.header_dir / file_name, start_group, end_group)
+        else:
             missing.append(file_name)
-            continue
-        convert_relationship(src, args.data_dir / file_name, args.header_dir / file_name, start_group, end_group)
 
     if missing:
         print("Missing expected files:")
