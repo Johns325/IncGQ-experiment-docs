@@ -1,0 +1,7 @@
+total_queries=1930
+unbounded_occurrences=1637
+unbounded_unique=244
+classic_unique=204
+union_unique=25
+complex_unique=15
+parse_errors=0
