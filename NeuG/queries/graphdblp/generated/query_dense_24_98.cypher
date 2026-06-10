@@ -1,0 +1,395 @@
+// source: query_dense_24_98.graph
+// vertices: 24, edges: 116
+MATCH (n0)-[r0:authored|:contains|:contributed_to]-(n1),
+      (n0)-[r1:authored|:contains|:contributed_to]-(n2),
+      (n0)-[r2:authored|:contains|:contributed_to]-(n3),
+      (n0)-[r3:authored|:contains|:contributed_to]-(n4),
+      (n0)-[r4:authored|:contains|:contributed_to]-(n5),
+      (n0)-[r5:authored|:contains|:contributed_to]-(n6),
+      (n0)-[r6:authored|:contains|:contributed_to]-(n7),
+      (n0)-[r7:authored|:contains|:contributed_to]-(n8),
+      (n0)-[r8:authored|:contains|:contributed_to]-(n9),
+      (n0)-[r9:authored|:contains|:contributed_to]-(n10),
+      (n0)-[r10:authored|:contains|:contributed_to]-(n11),
+      (n0)-[r11:authored|:contains|:contributed_to]-(n12),
+      (n1)-[r12:authored|:contains|:contributed_to]-(n2),
+      (n1)-[r13:authored|:contains|:contributed_to]-(n3),
+      (n1)-[r14:authored|:contains|:contributed_to]-(n4),
+      (n1)-[r15:authored|:contains|:contributed_to]-(n5),
+      (n1)-[r16:authored|:contains|:contributed_to]-(n6),
+      (n1)-[r17:authored|:contains|:contributed_to]-(n7),
+      (n1)-[r18:authored|:contains|:contributed_to]-(n8),
+      (n2)-[r19:authored|:contains|:contributed_to]-(n3),
+      (n2)-[r20:authored|:contains|:contributed_to]-(n4),
+      (n2)-[r21:authored|:contains|:contributed_to]-(n5),
+      (n2)-[r22:authored|:contains|:contributed_to]-(n6),
+      (n2)-[r23:authored|:contains|:contributed_to]-(n7),
+      (n2)-[r24:authored|:contains|:contributed_to]-(n8),
+      (n2)-[r25:authored|:contains|:contributed_to]-(n9),
+      (n2)-[r26:authored|:contains|:contributed_to]-(n10),
+      (n2)-[r27:authored|:contains|:contributed_to]-(n11),
+      (n2)-[r28:authored|:contains|:contributed_to]-(n12),
+      (n2)-[r29:authored|:contains|:contributed_to]-(n13),
+      (n2)-[r30:authored|:contains|:contributed_to]-(n14),
+      (n2)-[r31:authored|:contains|:contributed_to]-(n15),
+      (n2)-[r32:authored|:contains|:contributed_to]-(n16),
+      (n2)-[r33:authored|:contains|:contributed_to]-(n17),
+      (n2)-[r34:authored|:contains|:contributed_to]-(n18),
+      (n2)-[r35:authored|:contains|:contributed_to]-(n19),
+      (n3)-[r36:authored|:contains|:contributed_to]-(n4),
+      (n3)-[r37:authored|:contains|:contributed_to]-(n5),
+      (n3)-[r38:authored|:contains|:contributed_to]-(n6),
+      (n3)-[r39:authored|:contains|:contributed_to]-(n7),
+      (n3)-[r40:authored|:contains|:contributed_to]-(n8),
+      (n3)-[r41:authored|:contains|:contributed_to]-(n9),
+      (n3)-[r42:authored|:contains|:contributed_to]-(n10),
+      (n3)-[r43:authored|:contains|:contributed_to]-(n11),
+      (n3)-[r44:authored|:contains|:contributed_to]-(n12),
+      (n3)-[r45:authored|:contains|:contributed_to]-(n13),
+      (n3)-[r46:authored|:contains|:contributed_to]-(n14),
+      (n3)-[r47:authored|:contains|:contributed_to]-(n15),
+      (n3)-[r48:authored|:contains|:contributed_to]-(n16),
+      (n3)-[r49:authored|:contains|:contributed_to]-(n17),
+      (n3)-[r50:authored|:contains|:contributed_to]-(n18),
+      (n3)-[r51:authored|:contains|:contributed_to]-(n19),
+      (n4)-[r52:authored|:contains|:contributed_to]-(n5),
+      (n4)-[r53:authored|:contains|:contributed_to]-(n6),
+      (n4)-[r54:authored|:contains|:contributed_to]-(n7),
+      (n4)-[r55:authored|:contains|:contributed_to]-(n8),
+      (n4)-[r56:authored|:contains|:contributed_to]-(n9),
+      (n4)-[r57:authored|:contains|:contributed_to]-(n10),
+      (n4)-[r58:authored|:contains|:contributed_to]-(n11),
+      (n4)-[r59:authored|:contains|:contributed_to]-(n12),
+      (n4)-[r60:authored|:contains|:contributed_to]-(n13),
+      (n4)-[r61:authored|:contains|:contributed_to]-(n16),
+      (n4)-[r62:authored|:contains|:contributed_to]-(n17),
+      (n4)-[r63:authored|:contains|:contributed_to]-(n18),
+      (n4)-[r64:authored|:contains|:contributed_to]-(n19),
+      (n4)-[r65:authored|:contains|:contributed_to]-(n20),
+      (n5)-[r66:authored|:contains|:contributed_to]-(n6),
+      (n5)-[r67:authored|:contains|:contributed_to]-(n7),
+      (n5)-[r68:authored|:contains|:contributed_to]-(n8),
+      (n5)-[r69:authored|:contains|:contributed_to]-(n13),
+      (n5)-[r70:authored|:contains|:contributed_to]-(n16),
+      (n5)-[r71:authored|:contains|:contributed_to]-(n17),
+      (n5)-[r72:authored|:contains|:contributed_to]-(n18),
+      (n5)-[r73:authored|:contains|:contributed_to]-(n19),
+      (n6)-[r74:authored|:contains|:contributed_to]-(n7),
+      (n6)-[r75:authored|:contains|:contributed_to]-(n8),
+      (n6)-[r76:authored|:contains|:contributed_to]-(n9),
+      (n6)-[r77:authored|:contains|:contributed_to]-(n10),
+      (n6)-[r78:authored|:contains|:contributed_to]-(n11),
+      (n6)-[r79:authored|:contains|:contributed_to]-(n12),
+      (n6)-[r80:authored|:contains|:contributed_to]-(n20),
+      (n6)-[r81:authored|:contains|:contributed_to]-(n21),
+      (n7)-[r82:authored|:contains|:contributed_to]-(n8),
+      (n7)-[r83:authored|:contains|:contributed_to]-(n9),
+      (n7)-[r84:authored|:contains|:contributed_to]-(n10),
+      (n7)-[r85:authored|:contains|:contributed_to]-(n11),
+      (n7)-[r86:authored|:contains|:contributed_to]-(n12),
+      (n9)-[r87:authored|:contains|:contributed_to]-(n10),
+      (n9)-[r88:authored|:contains|:contributed_to]-(n11),
+      (n9)-[r89:authored|:contains|:contributed_to]-(n12),
+      (n10)-[r90:authored|:contains|:contributed_to]-(n11),
+      (n10)-[r91:authored|:contains|:contributed_to]-(n12),
+      (n11)-[r92:authored|:contains|:contributed_to]-(n12),
+      (n13)-[r93:authored|:contains|:contributed_to]-(n14),
+      (n13)-[r94:authored|:contains|:contributed_to]-(n15),
+      (n13)-[r95:authored|:contains|:contributed_to]-(n16),
+      (n13)-[r96:authored|:contains|:contributed_to]-(n17),
+      (n13)-[r97:authored|:contains|:contributed_to]-(n18),
+      (n13)-[r98:authored|:contains|:contributed_to]-(n19),
+      (n14)-[r99:authored|:contains|:contributed_to]-(n15),
+      (n14)-[r100:authored|:contains|:contributed_to]-(n16),
+      (n14)-[r101:authored|:contains|:contributed_to]-(n17),
+      (n14)-[r102:authored|:contains|:contributed_to]-(n18),
+      (n15)-[r103:authored|:contains|:contributed_to]-(n16),
+      (n15)-[r104:authored|:contains|:contributed_to]-(n17),
+      (n15)-[r105:authored|:contains|:contributed_to]-(n18),
+      (n16)-[r106:authored|:contains|:contributed_to]-(n17),
+      (n16)-[r107:authored|:contains|:contributed_to]-(n18),
+      (n16)-[r108:authored|:contains|:contributed_to]-(n19),
+      (n17)-[r109:authored|:contains|:contributed_to]-(n18),
+      (n17)-[r110:authored|:contains|:contributed_to]-(n19),
+      (n18)-[r111:authored|:contains|:contributed_to]-(n19),
+      (n20)-[r112:authored|:contains|:contributed_to]-(n21),
+      (n21)-[r113:authored|:contains|:contributed_to]-(n22),
+      (n21)-[r114:authored|:contains|:contributed_to]-(n23),
+      (n22)-[r115:authored|:contains|:contributed_to]-(n23)
+WHERE id(n0) <> id(n1)
+  AND id(n0) <> id(n2)
+  AND id(n0) <> id(n3)
+  AND id(n0) <> id(n4)
+  AND id(n0) <> id(n5)
+  AND id(n0) <> id(n6)
+  AND id(n0) <> id(n7)
+  AND id(n0) <> id(n8)
+  AND id(n0) <> id(n9)
+  AND id(n0) <> id(n10)
+  AND id(n0) <> id(n11)
+  AND id(n0) <> id(n12)
+  AND id(n0) <> id(n13)
+  AND id(n0) <> id(n14)
+  AND id(n0) <> id(n15)
+  AND id(n0) <> id(n16)
+  AND id(n0) <> id(n17)
+  AND id(n0) <> id(n18)
+  AND id(n0) <> id(n19)
+  AND id(n0) <> id(n20)
+  AND id(n0) <> id(n21)
+  AND id(n0) <> id(n22)
+  AND id(n0) <> id(n23)
+  AND id(n1) <> id(n2)
+  AND id(n1) <> id(n3)
+  AND id(n1) <> id(n4)
+  AND id(n1) <> id(n5)
+  AND id(n1) <> id(n6)
+  AND id(n1) <> id(n7)
+  AND id(n1) <> id(n8)
+  AND id(n1) <> id(n9)
+  AND id(n1) <> id(n10)
+  AND id(n1) <> id(n11)
+  AND id(n1) <> id(n12)
+  AND id(n1) <> id(n13)
+  AND id(n1) <> id(n14)
+  AND id(n1) <> id(n15)
+  AND id(n1) <> id(n16)
+  AND id(n1) <> id(n17)
+  AND id(n1) <> id(n18)
+  AND id(n1) <> id(n19)
+  AND id(n1) <> id(n20)
+  AND id(n1) <> id(n21)
+  AND id(n1) <> id(n22)
+  AND id(n1) <> id(n23)
+  AND id(n2) <> id(n3)
+  AND id(n2) <> id(n4)
+  AND id(n2) <> id(n5)
+  AND id(n2) <> id(n6)
+  AND id(n2) <> id(n7)
+  AND id(n2) <> id(n8)
+  AND id(n2) <> id(n9)
+  AND id(n2) <> id(n10)
+  AND id(n2) <> id(n11)
+  AND id(n2) <> id(n12)
+  AND id(n2) <> id(n13)
+  AND id(n2) <> id(n14)
+  AND id(n2) <> id(n15)
+  AND id(n2) <> id(n16)
+  AND id(n2) <> id(n17)
+  AND id(n2) <> id(n18)
+  AND id(n2) <> id(n19)
+  AND id(n2) <> id(n20)
+  AND id(n2) <> id(n21)
+  AND id(n2) <> id(n22)
+  AND id(n2) <> id(n23)
+  AND id(n3) <> id(n4)
+  AND id(n3) <> id(n5)
+  AND id(n3) <> id(n6)
+  AND id(n3) <> id(n7)
+  AND id(n3) <> id(n8)
+  AND id(n3) <> id(n9)
+  AND id(n3) <> id(n10)
+  AND id(n3) <> id(n11)
+  AND id(n3) <> id(n12)
+  AND id(n3) <> id(n13)
+  AND id(n3) <> id(n14)
+  AND id(n3) <> id(n15)
+  AND id(n3) <> id(n16)
+  AND id(n3) <> id(n17)
+  AND id(n3) <> id(n18)
+  AND id(n3) <> id(n19)
+  AND id(n3) <> id(n20)
+  AND id(n3) <> id(n21)
+  AND id(n3) <> id(n22)
+  AND id(n3) <> id(n23)
+  AND id(n4) <> id(n5)
+  AND id(n4) <> id(n6)
+  AND id(n4) <> id(n7)
+  AND id(n4) <> id(n8)
+  AND id(n4) <> id(n9)
+  AND id(n4) <> id(n10)
+  AND id(n4) <> id(n11)
+  AND id(n4) <> id(n12)
+  AND id(n4) <> id(n13)
+  AND id(n4) <> id(n14)
+  AND id(n4) <> id(n15)
+  AND id(n4) <> id(n16)
+  AND id(n4) <> id(n17)
+  AND id(n4) <> id(n18)
+  AND id(n4) <> id(n19)
+  AND id(n4) <> id(n20)
+  AND id(n4) <> id(n21)
+  AND id(n4) <> id(n22)
+  AND id(n4) <> id(n23)
+  AND id(n5) <> id(n6)
+  AND id(n5) <> id(n7)
+  AND id(n5) <> id(n8)
+  AND id(n5) <> id(n9)
+  AND id(n5) <> id(n10)
+  AND id(n5) <> id(n11)
+  AND id(n5) <> id(n12)
+  AND id(n5) <> id(n13)
+  AND id(n5) <> id(n14)
+  AND id(n5) <> id(n15)
+  AND id(n5) <> id(n16)
+  AND id(n5) <> id(n17)
+  AND id(n5) <> id(n18)
+  AND id(n5) <> id(n19)
+  AND id(n5) <> id(n20)
+  AND id(n5) <> id(n21)
+  AND id(n5) <> id(n22)
+  AND id(n5) <> id(n23)
+  AND id(n6) <> id(n7)
+  AND id(n6) <> id(n8)
+  AND id(n6) <> id(n9)
+  AND id(n6) <> id(n10)
+  AND id(n6) <> id(n11)
+  AND id(n6) <> id(n12)
+  AND id(n6) <> id(n13)
+  AND id(n6) <> id(n14)
+  AND id(n6) <> id(n15)
+  AND id(n6) <> id(n16)
+  AND id(n6) <> id(n17)
+  AND id(n6) <> id(n18)
+  AND id(n6) <> id(n19)
+  AND id(n6) <> id(n20)
+  AND id(n6) <> id(n21)
+  AND id(n6) <> id(n22)
+  AND id(n6) <> id(n23)
+  AND id(n7) <> id(n8)
+  AND id(n7) <> id(n9)
+  AND id(n7) <> id(n10)
+  AND id(n7) <> id(n11)
+  AND id(n7) <> id(n12)
+  AND id(n7) <> id(n13)
+  AND id(n7) <> id(n14)
+  AND id(n7) <> id(n15)
+  AND id(n7) <> id(n16)
+  AND id(n7) <> id(n17)
+  AND id(n7) <> id(n18)
+  AND id(n7) <> id(n19)
+  AND id(n7) <> id(n20)
+  AND id(n7) <> id(n21)
+  AND id(n7) <> id(n22)
+  AND id(n7) <> id(n23)
+  AND id(n8) <> id(n9)
+  AND id(n8) <> id(n10)
+  AND id(n8) <> id(n11)
+  AND id(n8) <> id(n12)
+  AND id(n8) <> id(n13)
+  AND id(n8) <> id(n14)
+  AND id(n8) <> id(n15)
+  AND id(n8) <> id(n16)
+  AND id(n8) <> id(n17)
+  AND id(n8) <> id(n18)
+  AND id(n8) <> id(n19)
+  AND id(n8) <> id(n20)
+  AND id(n8) <> id(n21)
+  AND id(n8) <> id(n22)
+  AND id(n8) <> id(n23)
+  AND id(n9) <> id(n10)
+  AND id(n9) <> id(n11)
+  AND id(n9) <> id(n12)
+  AND id(n9) <> id(n13)
+  AND id(n9) <> id(n14)
+  AND id(n9) <> id(n15)
+  AND id(n9) <> id(n16)
+  AND id(n9) <> id(n17)
+  AND id(n9) <> id(n18)
+  AND id(n9) <> id(n19)
+  AND id(n9) <> id(n20)
+  AND id(n9) <> id(n21)
+  AND id(n9) <> id(n22)
+  AND id(n9) <> id(n23)
+  AND id(n10) <> id(n11)
+  AND id(n10) <> id(n12)
+  AND id(n10) <> id(n13)
+  AND id(n10) <> id(n14)
+  AND id(n10) <> id(n15)
+  AND id(n10) <> id(n16)
+  AND id(n10) <> id(n17)
+  AND id(n10) <> id(n18)
+  AND id(n10) <> id(n19)
+  AND id(n10) <> id(n20)
+  AND id(n10) <> id(n21)
+  AND id(n10) <> id(n22)
+  AND id(n10) <> id(n23)
+  AND id(n11) <> id(n12)
+  AND id(n11) <> id(n13)
+  AND id(n11) <> id(n14)
+  AND id(n11) <> id(n15)
+  AND id(n11) <> id(n16)
+  AND id(n11) <> id(n17)
+  AND id(n11) <> id(n18)
+  AND id(n11) <> id(n19)
+  AND id(n11) <> id(n20)
+  AND id(n11) <> id(n21)
+  AND id(n11) <> id(n22)
+  AND id(n11) <> id(n23)
+  AND id(n12) <> id(n13)
+  AND id(n12) <> id(n14)
+  AND id(n12) <> id(n15)
+  AND id(n12) <> id(n16)
+  AND id(n12) <> id(n17)
+  AND id(n12) <> id(n18)
+  AND id(n12) <> id(n19)
+  AND id(n12) <> id(n20)
+  AND id(n12) <> id(n21)
+  AND id(n12) <> id(n22)
+  AND id(n12) <> id(n23)
+  AND id(n13) <> id(n14)
+  AND id(n13) <> id(n15)
+  AND id(n13) <> id(n16)
+  AND id(n13) <> id(n17)
+  AND id(n13) <> id(n18)
+  AND id(n13) <> id(n19)
+  AND id(n13) <> id(n20)
+  AND id(n13) <> id(n21)
+  AND id(n13) <> id(n22)
+  AND id(n13) <> id(n23)
+  AND id(n14) <> id(n15)
+  AND id(n14) <> id(n16)
+  AND id(n14) <> id(n17)
+  AND id(n14) <> id(n18)
+  AND id(n14) <> id(n19)
+  AND id(n14) <> id(n20)
+  AND id(n14) <> id(n21)
+  AND id(n14) <> id(n22)
+  AND id(n14) <> id(n23)
+  AND id(n15) <> id(n16)
+  AND id(n15) <> id(n17)
+  AND id(n15) <> id(n18)
+  AND id(n15) <> id(n19)
+  AND id(n15) <> id(n20)
+  AND id(n15) <> id(n21)
+  AND id(n15) <> id(n22)
+  AND id(n15) <> id(n23)
+  AND id(n16) <> id(n17)
+  AND id(n16) <> id(n18)
+  AND id(n16) <> id(n19)
+  AND id(n16) <> id(n20)
+  AND id(n16) <> id(n21)
+  AND id(n16) <> id(n22)
+  AND id(n16) <> id(n23)
+  AND id(n17) <> id(n18)
+  AND id(n17) <> id(n19)
+  AND id(n17) <> id(n20)
+  AND id(n17) <> id(n21)
+  AND id(n17) <> id(n22)
+  AND id(n17) <> id(n23)
+  AND id(n18) <> id(n19)
+  AND id(n18) <> id(n20)
+  AND id(n18) <> id(n21)
+  AND id(n18) <> id(n22)
+  AND id(n18) <> id(n23)
+  AND id(n19) <> id(n20)
+  AND id(n19) <> id(n21)
+  AND id(n19) <> id(n22)
+  AND id(n19) <> id(n23)
+  AND id(n20) <> id(n21)
+  AND id(n20) <> id(n22)
+  AND id(n20) <> id(n23)
+  AND id(n21) <> id(n22)
+  AND id(n21) <> id(n23)
+  AND id(n22) <> id(n23)
+RETURN count(*) AS count;
