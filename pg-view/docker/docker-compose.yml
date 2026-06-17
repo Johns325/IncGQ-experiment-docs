@@ -1,0 +1,40 @@
+services:
+  pgview:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: pgview-experiment:java11
+    working_dir: /workspace/pg-view
+    environment:
+      PGHOST: postgres
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: postgres@
+      NLTK_DATA: /usr/local/share/nltk_data
+    volumes:
+      - ${PGVIEW_REPO:-/root/workspace/pg-view}:/workspace/pg-view
+      - .:/workspace/pg-view-docker:ro
+      - ${NLTK_DATA_DIR:-/tmp/nltk_data}:/usr/local/share/nltk_data
+      - pgview_m2:/root/.m2
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: sleep infinity
+
+  postgres:
+    image: postgres:14
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres@
+      POSTGRES_DB: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - pgview_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  pgview_m2:
+  pgview_postgres_data:

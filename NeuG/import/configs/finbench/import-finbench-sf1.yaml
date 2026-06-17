@@ -1,0 +1,340 @@
+graph: finbench
+loading_config:
+  data_source:
+    scheme: file
+    location: /mnt/data/datasets/finbench/sf1/snapshot
+  import_option: init
+  format:
+    type: csv
+    metadata:
+      delimiter: "|"
+      header_row: true
+      quoting: false
+      escaping: false
+      batch_reader: true
+      null_values: [""]
+vertex_mappings:
+  - type_name: Person
+    inputs:
+      - Person.csv
+    column_mappings:
+      - column: {index: 0, name: personId}
+        property: id
+      - column: {index: 1, name: personName}
+        property: name
+      - column: {index: 2, name: isBlocked}
+        property: isBlocked
+      - column: {index: 3, name: createTime}
+        property: createTime
+      - column: {index: 4, name: gender}
+        property: gender
+      - column: {index: 5, name: birthday}
+        property: birthday
+      - column: {index: 6, name: country}
+        property: country
+      - column: {index: 7, name: city}
+        property: city
+  - type_name: Company
+    inputs:
+      - Company.csv
+    column_mappings:
+      - column: {index: 0, name: companyId}
+        property: id
+      - column: {index: 1, name: companyName}
+        property: name
+      - column: {index: 2, name: isBlocked}
+        property: isBlocked
+      - column: {index: 3, name: createTime}
+        property: createTime
+      - column: {index: 4, name: country}
+        property: country
+      - column: {index: 5, name: city}
+        property: city
+      - column: {index: 6, name: business}
+        property: business
+      - column: {index: 7, name: description}
+        property: description
+      - column: {index: 8, name: url}
+        property: url
+  - type_name: Account
+    inputs:
+      - Account.csv
+    column_mappings:
+      - column: {index: 0, name: accountId}
+        property: id
+      - column: {index: 1, name: createTime}
+        property: createTime
+      - column: {index: 2, name: isBlocked}
+        property: isBlocked
+      - column: {index: 3, name: accoutType}
+        property: type
+      - column: {index: 4, name: nickname}
+        property: nickname
+      - column: {index: 5, name: phonenum}
+        property: phonenum
+      - column: {index: 6, name: email}
+        property: email
+      - column: {index: 7, name: freqLoginType}
+        property: freqLoginType
+      - column: {index: 8, name: lastLoginTime}
+        property: lastLoginTime
+      - column: {index: 9, name: accountLevel}
+        property: accountLevel
+  - type_name: Loan
+    inputs:
+      - Loan.csv
+    column_mappings:
+      - column: {index: 0, name: loanId}
+        property: id
+      - column: {index: 1, name: loanAmount}
+        property: loanAmount
+      - column: {index: 2, name: balance}
+        property: balance
+      - column: {index: 3, name: createTime}
+        property: createTime
+      - column: {index: 4, name: loanUsage}
+        property: loanUsage
+      - column: {index: 5, name: interestRate}
+        property: interestRate
+  - type_name: Medium
+    inputs:
+      - Medium.csv
+    column_mappings:
+      - column: {index: 0, name: mediumId}
+        property: id
+      - column: {index: 1, name: mediumType}
+        property: type
+      - column: {index: 2, name: isBlocked}
+        property: isBlocked
+      - column: {index: 3, name: createTime}
+        property: createTime
+      - column: {index: 4, name: lastLoginTime}
+        property: lastLoginTime
+      - column: {index: 5, name: riskLevel}
+        property: riskLevel
+edge_mappings:
+  - type_triplet:
+      edge: PersonOwnAccount
+      source_vertex: Person
+      destination_vertex: Account
+    inputs:
+      - PersonOwnAccount.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: personId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: accountId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: createTime}
+        property: timestamp
+  - type_triplet:
+      edge: CompanyOwnAccount
+      source_vertex: Company
+      destination_vertex: Account
+    inputs:
+      - CompanyOwnAccount.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: companyId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: accountId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: createTime}
+        property: timestamp
+  - type_triplet:
+      edge: PersonApplyLoan
+      source_vertex: Person
+      destination_vertex: Loan
+    inputs:
+      - PersonApplyLoan.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: personId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: loanId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: createTime}
+        property: timestamp
+      - column: {index: 3, name: org}
+        property: org
+  - type_triplet:
+      edge: CompanyApplyLoan
+      source_vertex: Company
+      destination_vertex: Loan
+    inputs:
+      - CompanyApplyLoan.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: companyId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: loanId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: createTime}
+        property: timestamp
+      - column: {index: 3, name: org}
+        property: org
+  - type_triplet:
+      edge: PersonGuaranteePerson
+      source_vertex: Person
+      destination_vertex: Person
+    inputs:
+      - PersonGuaranteePerson.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: fromId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: toId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: createTime}
+        property: timestamp
+      - column: {index: 3, name: relation}
+        property: relation
+  - type_triplet:
+      edge: CompanyGuaranteeCompany
+      source_vertex: Company
+      destination_vertex: Company
+    inputs:
+      - CompanyGuaranteeCompany.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: fromId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: toId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: createTime}
+        property: timestamp
+      - column: {index: 3, name: relation}
+        property: relation
+  - type_triplet:
+      edge: PersonInvestCompany
+      source_vertex: Person
+      destination_vertex: Company
+    inputs:
+      - PersonInvestCompany.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: investorId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: companyId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: ratio}
+        property: ratio
+      - column: {index: 3, name: createTime}
+        property: timestamp
+  - type_triplet:
+      edge: CompanyInvestCompany
+      source_vertex: Company
+      destination_vertex: Company
+    inputs:
+      - CompanyInvestCompany.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: investorId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: companyId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: ratio}
+        property: ratio
+      - column: {index: 3, name: createTime}
+        property: timestamp
+  - type_triplet:
+      edge: AccountTransferAccount
+      source_vertex: Account
+      destination_vertex: Account
+    inputs:
+      - AccountTransferAccount.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: fromId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: toId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: amount}
+        property: amount
+      - column: {index: 3, name: createTime}
+        property: timestamp
+      - column: {index: 4, name: orderNum}
+        property: orderNum
+      - column: {index: 5, name: comment}
+        property: comment
+      - column: {index: 6, name: payType}
+        property: payType
+      - column: {index: 7, name: goodsType}
+        property: goodsType
+  - type_triplet:
+      edge: AccountWithdrawAccount
+      source_vertex: Account
+      destination_vertex: Account
+    inputs:
+      - AccountWithdrawAccount.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: fromId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: toId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: amount}
+        property: amount
+      - column: {index: 3, name: createTime}
+        property: timestamp
+  - type_triplet:
+      edge: AccountRepayLoan
+      source_vertex: Account
+      destination_vertex: Loan
+    inputs:
+      - AccountRepayLoan.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: accountId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: loanId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: amount}
+        property: amount
+      - column: {index: 3, name: createTime}
+        property: timestamp
+  - type_triplet:
+      edge: LoanDepositAccount
+      source_vertex: Loan
+      destination_vertex: Account
+    inputs:
+      - LoanDepositAccount.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: loanId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: accountId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: amount}
+        property: amount
+      - column: {index: 3, name: createTime}
+        property: timestamp
+  - type_triplet:
+      edge: MediumSignInAccount
+      source_vertex: Medium
+      destination_vertex: Account
+    inputs:
+      - MediumSignInAccount.csv
+    source_vertex_mappings:
+      - column: {index: 0, name: mediumId}
+        property: id
+    destination_vertex_mappings:
+      - column: {index: 1, name: accountId}
+        property: id
+    column_mappings:
+      - column: {index: 2, name: createTime}
+        property: timestamp
+      - column: {index: 3, name: location}
+        property: location

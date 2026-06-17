@@ -1,0 +1,4 @@
+ALTER TABLE PERSON ADD IF NOT EXISTS countryName STRING DEFAULT '';
+FILL PERSON(countryName) FROM (
+MATCH (country:PLACE)<-[:ISPARTOF]-(:PLACE)<-[:ISLOCATEDIN]-(zombie:PERSON)
+RETURN zombie.id, country.name);

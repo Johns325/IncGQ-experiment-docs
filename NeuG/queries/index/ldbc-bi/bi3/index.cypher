@@ -1,0 +1,9 @@
+ALTER TABLE PERSON ADD IF NOT EXISTS countryName STRING DEFAULT '';
+FILL PERSON(countryName) FROM (
+MATCH (country:PLACE)<-[:ISPARTOF]-(:PLACE)<-[:ISLOCATEDIN]-(person:PERSON)
+RETURN person.id, country.name);
+DROP TABLE IF EXISTS ROOT_POST;
+CREATE REL TABLE IF NOT EXISTS ROOT_POST(from Comment to Post, from Post to Post);
+FILL ROOT_POST() FROM (
+MATCH (post:Post)<-[e:REPLYOF*0..4294967295]-(message:COMMENT:POST)
+RETURN DISTINCT message.id, post.id);

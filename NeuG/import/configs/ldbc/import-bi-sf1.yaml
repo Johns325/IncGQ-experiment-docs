@@ -1,0 +1,496 @@
+graph: ldbc_snb
+loading_config:
+  data_source:
+    scheme: file
+    location: /mnt/data/datasets/ldbc_snb_bi/bi-sf1-composite-projected-fk/graphs/csv/bi/composite-projected-fk/initial_snapshot
+  import_option: init # append, overwrite, only init is supported now
+  format:
+    type: csv
+    metadata:
+      delimiter: "|"  # other loading configuration places here
+vertex_mappings:
+  - type_name: PLACE
+    inputs:
+      - static/Place/part-00000-a7174a9e-ada5-48f6-821a-96ee595aca47-c000.csv
+  - type_name: PERSON 
+    inputs:
+      - dynamic/Person/part-00000-810b194e-a37e-4d81-b400-1048b71fc508-c000.csv
+      - dynamic/Person/part-00001-810b194e-a37e-4d81-b400-1048b71fc508-c000.csv
+  - type_name: COMMENT
+    inputs:
+      - dynamic/Comment/part-00000-42632749-63ab-48ae-a8a3-e0cf92455cd5-c000.csv
+      - dynamic/Comment/part-00011-42632749-63ab-48ae-a8a3-e0cf92455cd5-c000.csv
+      - dynamic/Comment/part-00022-42632749-63ab-48ae-a8a3-e0cf92455cd5-c000.csv
+  - type_name: POST
+    inputs:
+      - dynamic/Post/part-00000-56a47534-5c7d-4346-a01f-d486046b956d-c000.csv
+      - dynamic/Post/part-00003-56a47534-5c7d-4346-a01f-d486046b956d-c000.csv
+      - dynamic/Post/part-00008-56a47534-5c7d-4346-a01f-d486046b956d-c000.csv
+  - type_name: FORUM
+    inputs:
+      - dynamic/Forum/part-00000-606b20d6-8bb0-412f-8112-bdb85b3c6c59-c000.csv
+      - dynamic/Forum/part-00001-606b20d6-8bb0-412f-8112-bdb85b3c6c59-c000.csv
+  - type_name: ORGANISATION
+    inputs:
+      - static/Organisation/part-00000-47a2b721-f60c-4fff-9642-204e6b6bd9f9-c000.csv
+  - type_name: TAGCLASS
+    inputs:
+      - static/TagClass/part-00000-bd8ee518-a0d0-46d9-ac2a-0a6391af032c-c000.csv
+  - type_name: TAG
+    inputs:
+      - static/Tag/part-00000-2cd84ed6-0979-46a6-a4ee-392b1aec9423-c000.csv
+edge_mappings:
+  - type_triplet: 
+      edge: HASCREATOR
+      source_vertex: COMMENT
+      destination_vertex: PERSON
+    inputs:
+      - dynamic/Comment_hasCreator_Person/part-00000-c088431c-eebc-452e-bbf5-5203599f827f-c000.csv
+      - dynamic/Comment_hasCreator_Person/part-00011-c088431c-eebc-452e-bbf5-5203599f827f-c000.csv
+      - dynamic/Comment_hasCreator_Person/part-00022-c088431c-eebc-452e-bbf5-5203599f827f-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: HASCREATOR
+      source_vertex: POST
+      destination_vertex: PERSON
+    inputs:
+      - dynamic/Post_hasCreator_Person/part-00000-9805029c-725b-498f-8310-c7ad90697a7f-c000.csv
+      - dynamic/Post_hasCreator_Person/part-00003-9805029c-725b-498f-8310-c7ad90697a7f-c000.csv
+      - dynamic/Post_hasCreator_Person/part-00008-9805029c-725b-498f-8310-c7ad90697a7f-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate  
+  - type_triplet:
+      edge: HASTAG
+      source_vertex: POST
+      destination_vertex: TAG
+    inputs:
+      - dynamic/Post_hasTag_Tag/part-00000-2de0ccf5-d900-4492-aaf2-6bc60cc1b61c-c000.csv
+      - dynamic/Post_hasTag_Tag/part-00002-2de0ccf5-d900-4492-aaf2-6bc60cc1b61c-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: HASTAG
+      source_vertex: COMMENT
+      destination_vertex: TAG
+    inputs:
+      - dynamic/Comment_hasTag_Tag/part-00000-f27f0804-6c70-4512-8e28-f2a00a9e28c9-c000.csv
+      - dynamic/Comment_hasTag_Tag/part-00002-f27f0804-6c70-4512-8e28-f2a00a9e28c9-c000.csv
+      - dynamic/Comment_hasTag_Tag/part-00004-f27f0804-6c70-4512-8e28-f2a00a9e28c9-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: HASTAG
+      source_vertex: FORUM
+      destination_vertex: TAG
+    inputs:
+      - dynamic/Forum_hasTag_Tag/part-00000-f1e8e2d9-dbf0-4c33-a358-3466d0e6d104-c000.csv
+      - dynamic/Forum_hasTag_Tag/part-00001-f1e8e2d9-dbf0-4c33-a358-3466d0e6d104-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: REPLYOF
+      source_vertex: COMMENT
+      destination_vertex: COMMENT
+    inputs:
+      - dynamic/Comment_replyOf_Comment/part-00000-844bcc3c-b761-46e4-b315-c97250a1a3fe-c000.csv
+      - dynamic/Comment_replyOf_Comment/part-00011-844bcc3c-b761-46e4-b315-c97250a1a3fe-c000.csv
+      - dynamic/Comment_replyOf_Comment/part-00022-844bcc3c-b761-46e4-b315-c97250a1a3fe-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: REPLYOF
+      source_vertex: COMMENT
+      destination_vertex: POST
+    inputs:
+      - dynamic/Comment_replyOf_Post/part-00000-f47a2d83-b1cb-47af-83d5-e2f2111d2ab0-c000.csv
+      - dynamic/Comment_replyOf_Post/part-00011-f47a2d83-b1cb-47af-83d5-e2f2111d2ab0-c000.csv
+      - dynamic/Comment_replyOf_Post/part-00022-f47a2d83-b1cb-47af-83d5-e2f2111d2ab0-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: CONTAINEROF
+      source_vertex: FORUM
+      destination_vertex: POST
+    inputs:
+      - dynamic/Forum_containerOf_Post/part-00000-d28f3a22-1fce-469d-b968-fd013a74f6df-c000.csv
+      - dynamic/Forum_containerOf_Post/part-00003-d28f3a22-1fce-469d-b968-fd013a74f6df-c000.csv
+      - dynamic/Forum_containerOf_Post/part-00008-d28f3a22-1fce-469d-b968-fd013a74f6df-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: HASMEMBER
+      source_vertex: FORUM
+      destination_vertex: PERSON
+    inputs:
+      - dynamic/Forum_hasMember_Person/part-00000-a2674f6d-0045-43bf-a377-5af5286c011b-c000.csv
+      - dynamic/Forum_hasMember_Person/part-00001-a2674f6d-0045-43bf-a377-5af5286c011b-c000.csv
+      - dynamic/Forum_hasMember_Person/part-00003-a2674f6d-0045-43bf-a377-5af5286c011b-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: HASMODERATOR
+      source_vertex: FORUM
+      destination_vertex: PERSON
+    inputs:
+      - dynamic/Forum_hasModerator_Person/part-00000-ab996d30-c314-4f19-9e67-6dc45ebef33e-c000.csv
+      - dynamic/Forum_hasModerator_Person/part-00001-ab996d30-c314-4f19-9e67-6dc45ebef33e-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: HASINTEREST
+      source_vertex: PERSON
+      destination_vertex: TAG
+    inputs:
+      - dynamic/Person_hasInterest_Tag/part-00000-9abf812e-ed76-4829-bf7a-ddff7f556510-c000.csv
+      - dynamic/Person_hasInterest_Tag/part-00001-9abf812e-ed76-4829-bf7a-ddff7f556510-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: ISLOCATEDIN
+      source_vertex: COMMENT
+      destination_vertex: PLACE
+    inputs:
+      - dynamic/Comment_isLocatedIn_Country/part-00000-7a0543c2-9e2c-4130-b9e3-915a00d87697-c000.csv
+      - dynamic/Comment_isLocatedIn_Country/part-00011-7a0543c2-9e2c-4130-b9e3-915a00d87697-c000.csv
+      - dynamic/Comment_isLocatedIn_Country/part-00022-7a0543c2-9e2c-4130-b9e3-915a00d87697-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: ISLOCATEDIN
+      source_vertex: PERSON
+      destination_vertex: PLACE
+    inputs:
+      - dynamic/Person_isLocatedIn_City/part-00000-ad39c1d9-b90e-496a-a095-1d3c5447e373-c000.csv
+      - dynamic/Person_isLocatedIn_City/part-00001-ad39c1d9-b90e-496a-a095-1d3c5447e373-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: ISLOCATEDIN
+      source_vertex: POST
+      destination_vertex: PLACE
+    inputs:
+      - dynamic/Post_isLocatedIn_Country/part-00000-5bb7405a-24dc-438b-afb6-d52bde1988b1-c000.csv
+      - dynamic/Post_isLocatedIn_Country/part-00003-5bb7405a-24dc-438b-afb6-d52bde1988b1-c000.csv
+      - dynamic/Post_isLocatedIn_Country/part-00008-5bb7405a-24dc-438b-afb6-d52bde1988b1-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: ORGANISATION_ISLOCATEDIN
+      source_vertex: ORGANISATION
+      destination_vertex: PLACE
+    inputs:
+      - static/Organisation_isLocatedIn_Place/part-00000-7a91a11d-64fb-4b32-ac13-f956a97a46f3-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+  - type_triplet:
+      edge: KNOWS
+      source_vertex: PERSON
+      destination_vertex: PERSON
+    inputs:
+      - dynamic/Person_knows_Person/part-00000-1aa77020-70f8-479e-94d6-67b289736cb3-c000.csv
+      - dynamic/Person_knows_Person/part-00001-1aa77020-70f8-479e-94d6-67b289736cb3-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: LIKES
+      source_vertex: PERSON
+      destination_vertex: COMMENT
+    inputs:
+      - dynamic/Person_likes_Comment/part-00000-939c8db8-69cc-449c-a1c1-4d839b076f23-c000.csv
+      - dynamic/Person_likes_Comment/part-00001-939c8db8-69cc-449c-a1c1-4d839b076f23-c000.csv
+      - dynamic/Person_likes_Comment/part-00004-939c8db8-69cc-449c-a1c1-4d839b076f23-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: LIKES
+      source_vertex: PERSON
+      destination_vertex: POST
+    inputs:
+      - dynamic/Person_likes_Post/part-00000-9781b1ab-c4e6-413c-b72c-c0edf8808a06-c000.csv
+      - dynamic/Person_likes_Post/part-00002-9781b1ab-c4e6-413c-b72c-c0edf8808a06-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: WORKAT
+      source_vertex: PERSON
+      destination_vertex: ORGANISATION
+    inputs:
+      - dynamic/Person_workAt_Company/part-00000-2adfb00d-db5b-4756-9bc4-2fa1f64770de-c000.csv
+      - dynamic/Person_workAt_Company/part-00001-2adfb00d-db5b-4756-9bc4-2fa1f64770de-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: workFrom
+        property: workFrom
+      - column:
+          index: 3
+          name: creationDate
+        property: creationDate
+  - type_triplet:
+      edge: ISPARTOF
+      source_vertex: PLACE
+      destination_vertex: PLACE
+    inputs:
+      - static/Place_isPartOf_Place/part-00000-da077f04-d6a8-468e-93a0-44ac20c8ff35-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+  - type_triplet:
+      edge: HASTYPE
+      source_vertex: TAG
+      destination_vertex: TAGCLASS
+    inputs:
+      - static/Tag_hasType_TagClass/part-00000-87209329-6c6c-4b2e-9897-d6f368f85907-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+  - type_triplet:
+      edge: ISSUBCLASSOF
+      source_vertex: TAGCLASS
+      destination_vertex: TAGCLASS
+    inputs:
+      - static/TagClass_isSubclassOf_TagClass/part-00000-a6cff386-6663-4846-85b2-b7fa460c26ff-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+  - type_triplet:
+      edge: STUDYAT
+      source_vertex: PERSON
+      destination_vertex: ORGANISATION
+    inputs:
+      - dynamic/Person_studyAt_University/part-00000-6bf7586c-0910-4e75-9105-bde764969d3b-c000.csv
+      - dynamic/Person_studyAt_University/part-00001-6bf7586c-0910-4e75-9105-bde764969d3b-c000.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: id
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: id
+    column_mappings:
+      - column:
+          index: 2
+          name: classYear
+        property: classYear
+      - column:
+          index: 3
+          name: creationDate
+        property: creationDate

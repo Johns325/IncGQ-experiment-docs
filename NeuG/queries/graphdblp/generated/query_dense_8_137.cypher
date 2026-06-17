@@ -1,18 +1,18 @@
 // source: query_dense_8_137.graph
 // vertices: 8, edges: 13
-MATCH (n0)-[r0:authored|:contains|:contributed_to]-(n1),
-      (n1)-[r1:authored|:contains|:contributed_to]-(n2),
-      (n2)-[r2:authored|:contains|:contributed_to]-(n3),
-      (n2)-[r3:authored|:contains|:contributed_to]-(n4),
-      (n2)-[r4:authored|:contains|:contributed_to]-(n5),
-      (n2)-[r5:authored|:contains|:contributed_to]-(n6),
-      (n3)-[r6:authored|:contains|:contributed_to]-(n4),
-      (n3)-[r7:authored|:contains|:contributed_to]-(n5),
-      (n3)-[r8:authored|:contains|:contributed_to]-(n6),
-      (n3)-[r9:authored|:contains|:contributed_to]-(n7),
-      (n4)-[r10:authored|:contains|:contributed_to]-(n5),
-      (n4)-[r11:authored|:contains|:contributed_to]-(n6),
-      (n5)-[r12:authored|:contains|:contributed_to]-(n6)
+MATCH (n0)-[r0:authored|contains|contributed_to]-(n1),
+      (n1)-[r1:authored|contains|contributed_to]-(n2),
+      (n2)-[r2:authored|contains|contributed_to]-(n3),
+      (n2)-[r3:authored|contains|contributed_to]-(n4),
+      (n2)-[r4:authored|contains|contributed_to]-(n5),
+      (n2)-[r5:authored|contains|contributed_to]-(n6),
+      (n3)-[r6:authored|contains|contributed_to]-(n4),
+      (n3)-[r7:authored|contains|contributed_to]-(n5),
+      (n3)-[r8:authored|contains|contributed_to]-(n6),
+      (n3)-[r9:authored|contains|contributed_to]-(n7),
+      (n4)-[r10:authored|contains|contributed_to]-(n5),
+      (n4)-[r11:authored|contains|contributed_to]-(n6),
+      (n5)-[r12:authored|contains|contributed_to]-(n6)
 WHERE id(n0) <> id(n1)
   AND id(n0) <> id(n2)
   AND id(n0) <> id(n3)

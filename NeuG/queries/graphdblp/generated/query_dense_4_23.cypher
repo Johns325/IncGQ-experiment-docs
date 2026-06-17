@@ -1,8 +1,8 @@
 // source: query_dense_4_23.graph
 // vertices: 4, edges: 3
-MATCH (n0)-[r0:authored|:contains|:contributed_to]-(n1),
-      (n1)-[r1:authored|:contains|:contributed_to]-(n2),
-      (n2)-[r2:authored|:contains|:contributed_to]-(n3)
+MATCH (n0)-[r0:authored|contains|contributed_to]-(n1),
+      (n1)-[r1:authored|contains|contributed_to]-(n2),
+      (n2)-[r2:authored|contains|contributed_to]-(n3)
 WHERE id(n0) <> id(n1)
   AND id(n0) <> id(n2)
   AND id(n0) <> id(n3)

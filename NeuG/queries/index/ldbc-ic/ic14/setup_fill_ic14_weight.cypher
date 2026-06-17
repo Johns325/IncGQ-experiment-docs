@@ -1,0 +1,6 @@
+FILL KNOWS(ic14_weight) FROM (
+MATCH (person1:PERSON)-[e:KNOWS]->(person2:PERSON)
+WITH person1, person2
+MATCH (person1)<-[:HASCREATOR]-(n:COMMENT:POST)-[:REPLYOF]-(m:COMMENT:POST)-[:HASCREATOR]->(person2)
+WITH person1, person2, SUM(CASE n IS NOT NULL WHEN TRUE THEN  CASE (label(m) = 'POST' OR label(n) = 'POST') WHEN TRUE THEN 1.0 ELSE 0.5 END ELSE 0.0 END) as w
+RETURN person1.id, person2.id, w);

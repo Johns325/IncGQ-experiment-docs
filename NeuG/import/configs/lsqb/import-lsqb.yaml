@@ -1,0 +1,500 @@
+graph: lsqb
+loading_config:
+  data_source:
+    scheme: file
+    location: /mnt/data/datasets/lsqb/social-network-sf1-projected-fk
+  import_option: init # append, overwrite, only init is supported now
+  format:
+    type: csv
+    metadata:
+      delimiter: "|"
+vertex_mappings:
+  - type_name: Company
+    inputs:
+      - Company.csv
+    column_mappings:
+      - column:
+          index: 0
+          name: "id:ID(Company)"
+        property: CompanyId
+  - type_name: University
+    inputs:
+      - University.csv
+    column_mappings:
+      - column:
+          index: 0
+          name: "id:ID(University)"
+        property: UniversityId
+  - type_name: Continent
+    inputs:
+      - Continent.csv
+    column_mappings:
+      - column:
+          index: 0
+          name: "id:ID(Continent)"
+        property: ContinentId
+  - type_name: Country
+    inputs:
+      - Country.csv
+    column_mappings:
+      - column:
+          index: 0
+          name: "id:ID(Country)"
+        property: CountryId
+  - type_name: City
+    inputs:
+      - City.csv
+    column_mappings:
+      - column:
+          index: 0
+          name: "id:ID(City)"
+        property: CityId
+  - type_name: Tag
+    inputs:
+      - Tag.csv
+    column_mappings:
+      - column:
+          index: 0
+          name: "id:ID(Tag)"
+        property: TagId
+  - type_name: TagClass
+    inputs:
+      - TagClass.csv
+    column_mappings:
+      - column:
+          index: 0
+          name: "id:ID(TagClass)"
+        property: TagClassId
+  - type_name: Forum
+    inputs:
+      - Forum.csv
+    column_mappings:
+      - column:
+          index: 0
+          name: "id:ID(Forum)"
+        property: ForumId
+  - type_name: Comment
+    inputs:
+      - Comment.csv
+    column_mappings:
+      - column:
+          index: 0
+          name: "id:ID(Comment)"
+        property: CommentId
+  - type_name: Post
+    inputs:
+      - Post.csv
+    column_mappings:
+      - column:
+          index: 0
+          name: "id:ID(Post)"
+        property: PostId
+  - type_name: Person
+    inputs:
+      - Person.csv
+    column_mappings:
+      - column:
+          index: 0
+          name: "id:ID(Person)"
+        property: PersonId
+edge_mappings:
+  - type_triplet:
+      edge: City_isPartOf_Country
+      source_vertex: City
+      destination_vertex: Country
+    inputs:
+      - City_isPartOf_Country.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(City)"
+        property: CityId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Country)"
+        property: CountryId
+  - type_triplet:
+      edge: Comment_hasCreator_Person
+      source_vertex: Comment
+      destination_vertex: Person
+    inputs:
+      - Comment_hasCreator_Person.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Comment)"
+        property: CommentId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Person)"
+        property: PersonId
+  - type_triplet:
+      edge: Comment_hasTag_Tag
+      source_vertex: Comment
+      destination_vertex: Tag
+    inputs:
+      - Comment_hasTag_Tag.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Comment)"
+        property: CommentId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Tag)"
+        property: TagId
+  - type_triplet:
+      edge: Comment_isLocatedIn_Country
+      source_vertex: Comment
+      destination_vertex: Country
+    inputs:
+      - Comment_isLocatedIn_Country.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Comment)"
+        property: CommentId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Country)"
+        property: CountryId
+  - type_triplet:
+      edge: Comment_replyOf_Comment
+      source_vertex: Comment
+      destination_vertex: Comment
+    inputs:
+      - Comment_replyOf_Comment.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Comment)"
+        property: CommentId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Comment)"
+        property: CommentId
+  - type_triplet:
+      edge: Comment_replyOf_Post
+      source_vertex: Comment
+      destination_vertex: Post
+    inputs:
+      - Comment_replyOf_Post.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Comment)"
+        property: CommentId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Post)"
+        property: PostId
+  - type_triplet:
+      edge: Company_isLocatedIn_Country
+      source_vertex: Company
+      destination_vertex: Country
+    inputs:
+      - Company_isLocatedIn_Country.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Company)"
+        property: CompanyId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Country)"
+        property: CountryId
+  - type_triplet:
+      edge: Country_isPartOf_Continent
+      source_vertex: Country
+      destination_vertex: Continent
+    inputs:
+      - Country_isPartOf_Continent.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Country)"
+        property: CountryId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Continent)"
+        property: ContinentId
+  - type_triplet:
+      edge: Forum_containerOf_Post
+      source_vertex: Forum
+      destination_vertex: Post
+    inputs:
+      - Forum_containerOf_Post.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Forum)"
+        property: ForumId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Post)"
+        property: PostId
+  - type_triplet:
+      edge: Forum_hasMember_Person
+      source_vertex: Forum
+      destination_vertex: Person
+    inputs:
+      - Forum_hasMember_Person.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Forum)"
+        property: ForumId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Person)"
+        property: PersonId
+  - type_triplet:
+      edge: Forum_hasModerator_Person
+      source_vertex: Forum
+      destination_vertex: Person
+    inputs:
+      - Forum_hasModerator_Person.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Forum)"
+        property: ForumId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Person)"
+        property: PersonId
+  - type_triplet:
+      edge: Forum_hasTag_Tag
+      source_vertex: Forum
+      destination_vertex: Tag
+    inputs:
+      - Forum_hasTag_Tag.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Forum)"
+        property: ForumId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Tag)"
+        property: TagId
+  - type_triplet:
+      edge: Person_hasInterest_Tag
+      source_vertex: Person
+      destination_vertex: Tag
+    inputs:
+      - Person_hasInterest_Tag.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Person)"
+        property: PersonId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Tag)"
+        property: TagId
+  - type_triplet:
+      edge: Person_isLocatedIn_City
+      source_vertex: Person
+      destination_vertex: City
+    inputs:
+      - Person_isLocatedIn_City.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Person)"
+        property: PersonId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(City)"
+        property: CityId
+  - type_triplet:
+      edge: Person_knows_Person
+      source_vertex: Person
+      destination_vertex: Person
+    inputs:
+      - Person_knows_Person.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Person)"
+        property: PersonId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Person)"
+        property: PersonId
+  - type_triplet:
+      edge: Person_likes_Comment
+      source_vertex: Person
+      destination_vertex: Comment
+    inputs:
+      - Person_likes_Comment.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Person)"
+        property: PersonId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Comment)"
+        property: CommentId
+  - type_triplet:
+      edge: Person_likes_Post
+      source_vertex: Person
+      destination_vertex: Post
+    inputs:
+      - Person_likes_Post.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Person)"
+        property: PersonId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Post)"
+        property: PostId
+  - type_triplet:
+      edge: Person_studyAt_University
+      source_vertex: Person
+      destination_vertex: University
+    inputs:
+      - Person_studyAt_University.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Person)"
+        property: PersonId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(University)"
+        property: UniversityId
+  - type_triplet:
+      edge: Person_workAt_Company
+      source_vertex: Person
+      destination_vertex: Company
+    inputs:
+      - Person_workAt_Company.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Person)"
+        property: PersonId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Company)"
+        property: CompanyId
+  - type_triplet:
+      edge: Post_hasCreator_Person
+      source_vertex: Post
+      destination_vertex: Person
+    inputs:
+      - Post_hasCreator_Person.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Post)"
+        property: PostId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Person)"
+        property: PersonId
+  - type_triplet:
+      edge: Post_hasTag_Tag
+      source_vertex: Post
+      destination_vertex: Tag
+    inputs:
+      - Post_hasTag_Tag.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Post)"
+        property: PostId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Tag)"
+        property: TagId
+  - type_triplet:
+      edge: Post_isLocatedIn_Country
+      source_vertex: Post
+      destination_vertex: Country
+    inputs:
+      - Post_isLocatedIn_Country.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Post)"
+        property: PostId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(Country)"
+        property: CountryId
+  - type_triplet:
+      edge: TagClass_isSubclassOf_TagClass
+      source_vertex: TagClass
+      destination_vertex: TagClass
+    inputs:
+      - TagClass_isSubclassOf_TagClass.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(TagClass)"
+        property: TagClassId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(TagClass)"
+        property: TagClassId
+  - type_triplet:
+      edge: Tag_hasType_TagClass
+      source_vertex: Tag
+      destination_vertex: TagClass
+    inputs:
+      - Tag_hasType_TagClass.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(Tag)"
+        property: TagId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(TagClass)"
+        property: TagClassId
+  - type_triplet:
+      edge: University_isLocatedIn_City
+      source_vertex: University
+      destination_vertex: City
+    inputs:
+      - University_isLocatedIn_City.csv
+    source_vertex_mappings:
+      - column:
+          index: 0
+          name: ":START_ID(University)"
+        property: UniversityId
+    destination_vertex_mappings:
+      - column:
+          index: 1
+          name: ":END_ID(City)"
+        property: CityId

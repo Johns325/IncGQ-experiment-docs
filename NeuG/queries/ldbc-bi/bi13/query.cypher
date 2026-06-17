@@ -5,7 +5,7 @@ OPTIONAL MATCH (zombie)<-[:HASCREATOR]-(message:POST:COMMENT)
 WITH zombie, TIMESTAMP('{} 00:00:00') AS idate, zombie.creationDate AS zdate,
      sum(CASE WHEN message IS NOT NULL AND message.creationDate < TIMESTAMP('{} 00:00:00') THEN 1 ELSE 0 END) AS messageCount
 WITH zombie, 12 * (date_part('year', idate) - date_part('year', zdate)) + (date_part('month', idate) - date_part('month', zdate)) + 1 AS months, messageCount
-WHERE messageCount / months < 1
+WHERE 1.0 * messageCount / months < 1.0
 WITH COLLECT(zombie) AS zombies
 UNWIND zombies AS zombie
 OPTIONAL MATCH (zombie)<-[:HASCREATOR]-(message:POST:COMMENT)<-[:LIKES]-(likerZombie:PERSON)

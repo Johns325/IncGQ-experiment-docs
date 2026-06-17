@@ -1,0 +1,30 @@
+FROM registry.cn-hongkong.aliyuncs.com/graphscope/interactive:latest
+
+USER root
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV NLTK_DATA=/usr/local/share/nltk_data
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        ca-certificates \
+        bzip2 \
+        maven \
+        postgresql \
+        postgresql-client \
+        python3-pip \
+        unzip \
+        wget \
+        zstd \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip3 install --no-cache-dir \
+        gdown \
+        nltk \
+        numpy \
+        pandas \
+    && mkdir -p "${NLTK_DATA}"
+
+ENTRYPOINT []
+CMD ["bash"]
+WORKDIR /workspace/pg-view

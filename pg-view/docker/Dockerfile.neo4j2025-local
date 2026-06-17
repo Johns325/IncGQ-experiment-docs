@@ -1,0 +1,13 @@
+FROM pgview-experiment:local-graphscope
+
+USER root
+
+ENV DEBIAN_FRONTEND=noninteractive
+ENV JAVA21_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
+        openjdk-21-jre-headless \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace/pg-view
